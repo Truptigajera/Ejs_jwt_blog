@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>otp verification</title>
+</head>
+<body>
+    <form action="/api/user/verifyotp" method="post"> 
+        <h1>OTP Sent In Your Email</h1>
+        <label for="otp">Enter OTP Here:</label>
+        <input type="number" name="otp" id="otp" placeholder="Enter your OTP" pattern="\d{4}" title="Please enter 4 digit number"  required>
+        <a href="/api/user/resendotp">Resend OTP</a>
+        <button type="submit">Verify OTP</button>
+    </form>
+</body>
+</html>
