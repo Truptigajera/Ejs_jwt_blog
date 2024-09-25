@@ -111,6 +111,12 @@
         tr:hover {
             background-color: #f1f1f1;
         }
+
+        /* Ensures the Date column does not wrap text */
+        td:nth-child(4) {
+            white-space: nowrap; /* Prevents wrapping */
+            width: 180px; /* Adjust the width to fit date format like 'Mon Sep 23 2024' */
+        }
     </style>
 </head>
 <body>
@@ -131,7 +137,7 @@
                 <th>Sr No.</th>
                 <th>Blog Title</th>
                 <th>Blog Description</th>
-                <th>Date</th>
+                <th>Date</th> <!-- This column will now be wider to show the full date -->
             </tr>
         </thead>
         <tbody>
@@ -140,7 +146,7 @@
                     <td><%= i + 1 %></td>
                     <td><%= blogs[i].title %></td>
                     <td><%= blogs[i].description %></td>
-                    <td><%= blogs[i].Date %></td>
+                    <td><%= blogs[i].Date.toDateString() %></td> <!-- Date displayed on one line -->
                 </tr>
             <% } %>
         </tbody>

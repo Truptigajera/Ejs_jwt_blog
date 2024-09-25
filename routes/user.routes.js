@@ -33,7 +33,7 @@ userRoutes.post("/verifyotp" , verifyotp );
 //forgotpassword
 userRoutes.get('/forgotpassword',forgotpasswordPage)
 userRoutes.get('/resetpasswordpage',resetPasswordPage)
-userRoutes.post('/resetpassword' , resetPassword)
+userRoutes.post('/resetpassword' , verifyToken,resetPassword)
 
 
 module.exports = userRoutes;

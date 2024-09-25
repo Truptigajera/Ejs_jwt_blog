@@ -3,13 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>otp verification</title>
+    <title>OTP Verification</title>
+    <style>
+        /* Basic Reset */
+        body, h1, form, label, input, button, a {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        form {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            max-width: 100%;
+            animation: fadeInUp 0.5s ease-in-out;
+        }
+
+        h1 {
+            font-size: 18px;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input[type="number"] {
+            width: calc(100% - 22px); /* Adjust for padding and border */
+            padding: 10px;
+            margin-bottom: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="number"]:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        a {
+            display: block;
+            margin-top: 10px;
+            margin-bottom: 16px;
+            color: #007bff;
+            text-decoration: none;
+            font-size: 14px;
+            text-align: center;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: #0056b3;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
 </head>
 <body>
     <form action="/api/user/verifyotp" method="post"> 
-        <h1>OTP Sent In Your Email</h1>
+        <h1>OTP Sent to Your Email</h1>
         <label for="otp">Enter OTP Here:</label>
-        <input type="number" name="otp" id="otp" placeholder="Enter your OTP" pattern="\d{4}" title="Please enter 4 digit number"  required>
+        <input type="number" name="otp" id="otp" placeholder="Enter your OTP" pattern="\d{4}" title="Please enter a 4-digit number" required>
         <a href="/api/user/resendotp">Resend OTP</a>
         <button type="submit">Verify OTP</button>
     </form>

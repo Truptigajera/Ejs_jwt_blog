@@ -6,32 +6,32 @@ const UserOTP = require('../model/otp.model');
 const User = require('../model/user.model')
 
 /***********************Forgot Password Page***********************/
-exports.forgotpasswordPage = async (req, res) => {
+exports.forgotpasswordPage =async (req, res)=>{
     try {
         res.render("forgotPassword.ejs");
     } catch (error) {
         console.log(error);
-        res.json({ messag: "Server error" });
+        res.json({messag: "Server error"});
     }
 }
 
 /***********************OTP Vrify Page***********************/
-exports.showverifyotppage = async (req, res) => {
+exports.showverifyotppage = async (req, res)=>{
     try {
         res.render("otp.ejs");
     } catch (error) {
         console.log(error);
-        res.json({ messag: "Server error" });
+        res.json({messag: "Server error"});
     }
 }
 
 /***********************reset password Page***********************/
-exports.resetPasswordPage = async (req, res) => {
+exports.resetPasswordPage = async (req, res)=>{
     try {
         res.render("resetpassword.ejs");
     } catch (error) {
         console.log(error);
-        res.json({ messag: "Server error" });
+        res.json({messag: "Server error"});
     }
 }
 
@@ -83,12 +83,12 @@ exports.generateotp = async (req, res) => {
 /***********************VerifyOTP***********************/
 exports.verifyotp = async (req, res) => {
     try {
-        const { otp } = req.body;
+        const { otp } = req.body;        
         const otpRecord = await UserOTP.findOne({ otp: otp }).exec();
         if (otpRecord) {
-            res.status(200).redirect("/api/user/resetpasswordpage");
+            res.status(200).redirect("/api/user/resetpasswordpage"); 
         } else {
-            res.status(400).render('otp.ejs', { message: "Invalid OTP", email });
+            res.status(400).render('otp.ejs', { message: "Invalid OTP", email: email }); 
         }
     } catch (error) {
         console.error(error);
@@ -99,22 +99,17 @@ exports.verifyotp = async (req, res) => {
 exports.resetPassword = async (req, res) => {
     try {
         const { newpassword, confirmpassword } = req.body;
-        // let user = req.user;
-        const user = req.body.email;
-        
-        user  = await User.findOne({email: req.body.email});
-
-        if (!newpassword || !confirmpassword) {
-            return res.json({ message: "please fufilled the password" });
+        let user = req.user;
+        if (!newpassword || !confirmpassword) { 
+            return res.json({ message: "please fufilled the password"});
         }
-        if (newpassword !== confirmpassword) {
-            return res.json({ message: 'confirm password not matched...' });
+        if (newpassword !== confirmpassword) { 
+           return res.json({ message: 'confirm password not matched...' });
         }
 
         let hashpasssword = await bcrypt.hash(newpassword, 10);
         user = await User.findByIdAndUpdate(
-            user._id,
-
+            user._id, 
             { $set: { password: hashpasssword } },
             { new: true }
         );
